@@ -1,11 +1,8 @@
 import type { Request, Response } from "express";
-import { AuthService } from "./auth.service";
 
 // GET /api/auth/me — returns the currently logged-in user & session
 const getMe = async (req: Request, res: Response) => {
-    const session = await AuthService.getMe(req);
-
-    if (!session) {
+    if (!req.user) {
         res.status(401).json({
             success: false,
             message: "Unauthorized. Please sign in.",
@@ -17,8 +14,8 @@ const getMe = async (req: Request, res: Response) => {
         success: true,
         message: "User fetched successfully",
         data: {
-            user: session.user,
-            session: session.session,
+            user: req.user,
+            session: req.session,
         },
     });
 };
