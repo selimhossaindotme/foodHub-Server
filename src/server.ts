@@ -1,5 +1,5 @@
 import app from "./app";
-import envVariables from "./config";
+import envVariables from "./app/config";
 import { prisma } from "./lib/prisma";
 
 
